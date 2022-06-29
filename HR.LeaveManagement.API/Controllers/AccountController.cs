@@ -1,4 +1,5 @@
 ﻿using HR.LeaveManagement.Application.Contracts.Identity;
+using HR.LeaveManagement.Application.DTOs.Employee;
 using HR.LeaveManagement.Application.DTOs.Identity;
 using HR.LeaveManagement.Application.Models.Identity;
 using Microsoft.AspNetCore.Authorization;

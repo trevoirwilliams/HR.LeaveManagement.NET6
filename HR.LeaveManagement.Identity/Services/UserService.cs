@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using HR.LeaveManagement.Application.Contracts.Identity;
+using HR.LeaveManagement.Application.DTOs.Employee;
 using HR.LeaveManagement.Application.DTOs.Identity;
 using HR.LeaveManagement.Application.Models.Identity;
 using HR.LeaveManagement.Identity.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,11 +19,18 @@ namespace HR.LeaveManagement.Identity.Services
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IAuthService _authService;
+        private readonly IMapper mapper;
 
-        public UserService(UserManager<ApplicationUser> userManager, IAuthService authService)
+        public UserService(UserManager<ApplicationUser> userManager, IAuthService authService, IMapper mapper )
         {
             _userManager = userManager;
             _authService = authService;
+            this.mapper = mapper;
+        }
+
+        public async Task<List<AllEmployeesDto>> GetAllEmployees()
+        {
+            return await mapper.ProjectTo<AllEmployeesDto>(_userManager.Users).ToListAsync();
         }
 
         public async Task<Employee> GetEmployee(string userId)
@@ -39,7 +48,8 @@ namespace HR.LeaveManagement.Identity.Services
         public async Task<List<Employee>> GetEmployees()
         {
             var employees = await _userManager.GetUsersInRoleAsync("Employee");
-            return employees.Select(q => new Employee { 
+            return employees.Select(q => new Employee
+            {
                 Id = q.Id,
                 Email = q.Email,
                 Firstname = q.FirstName,
@@ -53,6 +63,11 @@ namespace HR.LeaveManagement.Identity.Services
 
             var result = await _authService.Register(registerEmployeeDto);
             return result;
+        }
+
+        Task<List<Employee>> IUserService.GetEmployees()
+        {
+            throw new NotImplementedException();
         }
     }
 }
