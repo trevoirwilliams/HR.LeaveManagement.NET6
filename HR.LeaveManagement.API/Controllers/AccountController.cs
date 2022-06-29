@@ -1,5 +1,7 @@
 ﻿using HR.LeaveManagement.Application.Contracts.Identity;
+using HR.LeaveManagement.Application.DTOs.Identity;
 using HR.LeaveManagement.Application.Models.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -10,9 +12,12 @@ namespace HR.LeaveManagement.Api.Controllers
     public class AccountController : ControllerBase
     {
         private readonly IAuthService _authenticationService;
-        public AccountController(IAuthService authenticationService)
+        private readonly IUserService _userService;
+
+        public AccountController(IAuthService authenticationService, IUserService userService)
         {
             _authenticationService = authenticationService;
+            _userService = userService;
         }
 
         [HttpPost("login")]
@@ -21,10 +26,22 @@ namespace HR.LeaveManagement.Api.Controllers
             return Ok(await _authenticationService.Login(request));
         }
 
-        [HttpPost("register")]
-        public async Task<ActionResult<RegistrationResponse>> Register(RegistrationRequest request)
+        //[HttpPost("register")]
+        //public async Task<ActionResult<RegistrationResponse>> Register(RegistrationRequest request)
+        //{
+        //    return Ok(await _authenticationService.Register(request));
+        //}
+        [HttpPost("registerEmployee")]
+        [Authorize(Roles = "Administrator")]
+        public async Task<ActionResult<RegistrationResponse>> RegisterEmployee([FromBody] RegisterEmployeeDto request)
         {
-            return Ok(await _authenticationService.Register(request));
+            if (ModelState.IsValid)
+            {
+
+            }
+            var result = await _userService.RegisterEmployee(request);
+
+            return result;
         }
     }
 }

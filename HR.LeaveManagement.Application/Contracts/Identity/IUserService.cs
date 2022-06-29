@@ -1,4 +1,5 @@
-﻿using HR.LeaveManagement.Application.Models.Identity;
+﻿using HR.LeaveManagement.Application.DTOs.Identity;
+using HR.LeaveManagement.Application.Models.Identity;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
@@ -11,5 +12,6 @@ namespace HR.LeaveManagement.Application.Contracts.Identity
     {
         Task<List<Employee>> GetEmployees();
         Task<Employee> GetEmployee(string userId);
+        Task<RegistrationResponse> RegisterEmployee(RegisterEmployeeDto registerEmployeeDto);
     }
 }

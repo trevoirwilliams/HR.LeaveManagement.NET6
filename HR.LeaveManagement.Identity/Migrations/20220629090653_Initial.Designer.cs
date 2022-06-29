@@ -4,20 +4,25 @@ using HR.LeaveManagement.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace HR.LeaveManagement.Identity.Migrations
+#nullable disable
+
+namespace HR.LeaveManagement.API.Migrations
 {
     [DbContext(typeof(LeaveManagementIdentityDbContext))]
-    partial class LeaveManagementIdentityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220629090653_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.8")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "6.0.4")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
             modelBuilder.Entity("HR.LeaveManagement.Identity.Models.ApplicationUser", b =>
                 {
@@ -27,8 +32,26 @@ namespace HR.LeaveManagement.Identity.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BankDetails")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BirthPlace")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CardAuthority")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Discipline")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -41,6 +64,12 @@ namespace HR.LeaveManagement.Identity.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("IBAN")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IdCard")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
@@ -50,6 +79,9 @@ namespace HR.LeaveManagement.Identity.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<string>("MiddleName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -57,6 +89,9 @@ namespace HR.LeaveManagement.Identity.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("Office")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
@@ -70,12 +105,24 @@ namespace HR.LeaveManagement.Identity.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
+
+                    b.Property<int>("VacationHours")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("WorkExperienceInCompanyInDays")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WorkExperienceInDays")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -87,44 +134,70 @@ namespace HR.LeaveManagement.Identity.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers");
+                    b.ToTable("AspNetUsers", (string)null);
 
                     b.HasData(
                         new
                         {
                             Id = "8e445865-a24d-4543-a6c6-9443d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d2cedf01-cee0-430a-b820-0c377b586c0a",
+                            Address = "123 street",
+                            BankDetails = "bank",
+                            BirthPlace = "Sofia",
+                            CardAuthority = "Sofia",
+                            ConcurrencyStamp = "3ea3fab3-f76f-4ea2-9ae4-b9ca67955135",
+                            Country = "Bulgaria",
+                            Discipline = "test",
                             Email = "admin@localhost.com",
                             EmailConfirmed = true,
                             FirstName = "System",
+                            IBAN = "123",
+                            IdCard = "3333333333",
                             LastName = "Admin",
                             LockoutEnabled = false,
+                            MiddleName = "admin",
                             NormalizedEmail = "ADMIN@LOCALHOST.COM",
                             NormalizedUserName = "ADMIN@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEN/+QPuA+uuzTXrdYR7YF0/+JPxiPmjUY/ukh+lBiXnLyMcVGwVaQDSrcginM2gbtA==",
+                            Office = "sofia",
+                            PasswordHash = "AQAAAAEAACcQAAAAEC06D8IhcHJQa3OPpUkpwTd2Xv4EQOC6Sw+JxKrRTW8unYMhKvLTPDL0Zx6o5oMzEw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b0bc8cba-dbe5-49c1-b77c-108c1dcccacc",
+                            SecurityStamp = "fae031d7-c834-45d8-9e77-108c6c2497a1",
+                            StartDate = new DateTime(2022, 6, 29, 12, 6, 53, 222, DateTimeKind.Local).AddTicks(4844),
                             TwoFactorEnabled = false,
-                            UserName = "admin@localhost.com"
+                            UserName = "admin@localhost.com",
+                            VacationHours = 52,
+                            WorkExperienceInDays = 60
                         },
                         new
                         {
                             Id = "9e224968-33e4-4652-b7b7-8574d048cdb9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "49ff2dd4-d01a-42bb-afb8-83202db83269",
+                            Address = "123 street",
+                            BankDetails = "bank",
+                            BirthPlace = "Sofia",
+                            CardAuthority = "Sofia",
+                            ConcurrencyStamp = "dd9f3a83-7739-49fd-9ff1-aa1a1d751704",
+                            Country = "Bulgaria",
+                            Discipline = "test",
                             Email = "user@localhost.com",
                             EmailConfirmed = true,
                             FirstName = "System",
+                            IBAN = "123",
+                            IdCard = "3333333333",
                             LastName = "User",
                             LockoutEnabled = false,
+                            MiddleName = "admin",
                             NormalizedEmail = "USER@LOCALHOST.COM",
                             NormalizedUserName = "USER@LOCALHOST.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEnH3am4iXtp/eOTCv2+/TfcX6lIU9iYzudCAZkuGPuPyHjO8/6+fUwUX0kZfjZj3A==",
+                            Office = "sofia",
+                            PasswordHash = "AQAAAAEAACcQAAAAEM9O3tZDVw5w0f9TugPZs6I0j0EahRzqoBBretQcM9LOwsSPli+5+DXd/v04ygY6vw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a039aaef-c811-4cc7-a4e3-42092c879d08",
+                            SecurityStamp = "388cfe94-a35f-460d-aba5-e146d4d76956",
+                            StartDate = new DateTime(2022, 6, 29, 12, 6, 53, 248, DateTimeKind.Local).AddTicks(6464),
                             TwoFactorEnabled = false,
-                            UserName = "user@localhost.com"
+                            UserName = "user@localhost.com",
+                            VacationHours = 52,
+                            WorkExperienceInDays = 60
                         });
                 });
 
@@ -152,20 +225,20 @@ namespace HR.LeaveManagement.Identity.Migrations
                         .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("AspNetRoles");
+                    b.ToTable("AspNetRoles", (string)null);
 
                     b.HasData(
                         new
                         {
                             Id = "cac43a6e-f7bb-4448-baaf-1add431ccbbf",
-                            ConcurrencyStamp = "68bb5593-dfd4-4951-a3b0-5fe5788ebde4",
+                            ConcurrencyStamp = "8a335313-2f71-4780-9573-5df85d8b9f47",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         },
                         new
                         {
                             Id = "cbc43a8e-f7bb-4445-baaf-1add431ffbbf",
-                            ConcurrencyStamp = "d11f9641-113b-4d94-9505-35d91cc7f298",
+                            ConcurrencyStamp = "5a9bf905-b743-4511-a423-ea9f9af6339f",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -175,8 +248,9 @@ namespace HR.LeaveManagement.Identity.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -192,15 +266,16 @@ namespace HR.LeaveManagement.Identity.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims");
+                    b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -216,7 +291,7 @@ namespace HR.LeaveManagement.Identity.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims");
+                    b.ToTable("AspNetUserClaims", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -238,7 +313,7 @@ namespace HR.LeaveManagement.Identity.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins");
+                    b.ToTable("AspNetUserLogins", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -253,7 +328,7 @@ namespace HR.LeaveManagement.Identity.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles");
+                    b.ToTable("AspNetUserRoles", (string)null);
 
                     b.HasData(
                         new
@@ -284,7 +359,7 @@ namespace HR.LeaveManagement.Identity.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens");
+                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

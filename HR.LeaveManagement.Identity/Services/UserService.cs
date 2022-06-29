@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HR.LeaveManagement.Application.Contracts.Identity;
+using HR.LeaveManagement.Application.DTOs.Identity;
 using HR.LeaveManagement.Application.Models.Identity;
 using HR.LeaveManagement.Identity.Models;
 using Microsoft.AspNetCore.Identity;
@@ -15,10 +16,12 @@ namespace HR.LeaveManagement.Identity.Services
     public class UserService : IUserService
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IAuthService _authService;
 
-        public UserService(UserManager<ApplicationUser> userManager)
+        public UserService(UserManager<ApplicationUser> userManager, IAuthService authService)
         {
             _userManager = userManager;
+            _authService = authService;
         }
 
         public async Task<Employee> GetEmployee(string userId)
@@ -42,6 +45,14 @@ namespace HR.LeaveManagement.Identity.Services
                 Firstname = q.FirstName,
                 Lastname = q.LastName
             }).ToList();
+        }
+
+        public async Task<RegistrationResponse> RegisterEmployee(RegisterEmployeeDto registerEmployeeDto)
+        {
+            //add validation
+
+            var result = await _authService.Register(registerEmployeeDto);
+            return result;
         }
     }
 }
