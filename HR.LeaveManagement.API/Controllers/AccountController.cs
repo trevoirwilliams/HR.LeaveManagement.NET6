@@ -44,12 +44,5 @@ namespace HR.LeaveManagement.Api.Controllers
 
             return result;
         }
-
-        [HttpGet]
-        public async Task<List<AllEmployeesDto>> Get()
-        {
-            var allEmployees = await _userService.GetAllEmployees();
-            return allEmployees;
-        }
     }
 }
