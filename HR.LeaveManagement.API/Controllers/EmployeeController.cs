@@ -18,7 +18,7 @@ namespace HR.LeaveManagement.API.Controllers
             this.userService = userService;
         }
 
-        // GET: api/<EmployeeController>
+        // GET: api/<EmployeeController>/
         [HttpGet]
         public Task<List<AllEmployeesDto>> Get()
         {
