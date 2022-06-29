@@ -16,6 +16,7 @@ namespace HR.LeaveManagement.Identity.Configurations
         {
             CreateMap<RegisterEmployeeDto, ApplicationUser>().ReverseMap();
             CreateMap<AllEmployeesDto, ApplicationUser>().ReverseMap();
+            CreateMap<EmployeeDetailsDto, ApplicationUser>().ReverseMap();
         }
     }
 }
