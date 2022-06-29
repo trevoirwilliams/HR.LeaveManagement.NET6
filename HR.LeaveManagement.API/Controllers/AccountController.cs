@@ -1,4 +1,5 @@
 ﻿using HR.LeaveManagement.Application.Contracts.Identity;
+using HR.LeaveManagement.Application.DTOs.Employee;
 using HR.LeaveManagement.Application.DTOs.Identity;
 using HR.LeaveManagement.Application.Models.Identity;
 using Microsoft.AspNetCore.Authorization;
@@ -42,6 +43,13 @@ namespace HR.LeaveManagement.Api.Controllers
             var result = await _userService.RegisterEmployee(request);
 
             return result;
+        }
+
+        [HttpGet]
+        public async Task<List<AllEmployeesDto>> Get()
+        {
+            var allEmployees = await _userService.GetAllEmployees();
+            return allEmployees;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HR.LeaveManagement.Application.DTOs.Employee;
 using HR.LeaveManagement.Application.DTOs.Identity;
 using HR.LeaveManagement.Identity.Models;
 using System;
@@ -14,6 +15,7 @@ namespace HR.LeaveManagement.Identity.Configurations
         public ProfileMapper()
         {
             CreateMap<RegisterEmployeeDto, ApplicationUser>().ReverseMap();
+            CreateMap<AllEmployeesDto, ApplicationUser>().ReverseMap();
         }
     }
 }
