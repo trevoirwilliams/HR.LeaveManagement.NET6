@@ -27,7 +27,7 @@ namespace HR.LeaveManagement.API.Controllers
 
         // GET api/<EmployeeController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public string Get(int id) 
         {
             return "value";
         }
