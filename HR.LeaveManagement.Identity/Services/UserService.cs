@@ -3,6 +3,7 @@ using HR.LeaveManagement.Application.Contracts.Identity;
 using HR.LeaveManagement.Application.DTOs.Employee;
 using HR.LeaveManagement.Application.DTOs.Identity;
 using HR.LeaveManagement.Application.DTOs.Identity.Validators;
+using HR.LeaveManagement.Application.Exceptions;
 using HR.LeaveManagement.Application.Models.Identity;
 using HR.LeaveManagement.Application.Responses;
 using HR.LeaveManagement.Identity.Models;
@@ -86,9 +87,9 @@ namespace HR.LeaveManagement.Identity.Services
                 result = await _authService.Register(registerEmployeeDto);
 
             }
-            catch (Exception ex)
+            catch (ValidationException ex)
             {
-                response.Errors.Add(ex.Message.ToString());
+                response.Errors.AddRange(ex.Errors);
                 response.Success = false;
                 response.Message = "Creation unsuccessful";
                 return response;

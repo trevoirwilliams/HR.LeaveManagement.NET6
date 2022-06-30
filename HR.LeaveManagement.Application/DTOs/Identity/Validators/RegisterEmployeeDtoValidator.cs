@@ -11,9 +11,9 @@ namespace HR.LeaveManagement.Application.DTOs.Identity.Validators
     {
         public RegisterEmployeeDtoValidator()
         {
-            RuleFor(a => a.Password)
+            /*RuleFor(a => a.Password)
                 .MinimumLength(6).WithMessage("{PropertyName} must be at least {ComparisonValue} digits")
-                .NotEmpty().WithMessage("Please enter password");
+                .NotEmpty().WithMessage("Please enter password");*/
 
             RuleFor(a => a.Email)
                 .NotEmpty().WithMessage("Email address is required.")
