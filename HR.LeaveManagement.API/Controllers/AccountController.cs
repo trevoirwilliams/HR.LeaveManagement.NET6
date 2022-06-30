@@ -2,6 +2,7 @@
 using HR.LeaveManagement.Application.DTOs.Employee;
 using HR.LeaveManagement.Application.DTOs.Identity;
 using HR.LeaveManagement.Application.Models.Identity;
+using HR.LeaveManagement.Application.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -34,12 +35,8 @@ namespace HR.LeaveManagement.Api.Controllers
         //}
         [HttpPost("registerEmployee")]
         [Authorize(Roles = "Administrator")]
-        public async Task<ActionResult<RegistrationResponse>> RegisterEmployee([FromBody] RegisterEmployeeDto request)
+        public async Task<ActionResult<BaseCommandResponse>> RegisterEmployee([FromBody] RegisterEmployeeDto request)
         {
-            if (ModelState.IsValid)
-            {
-
-            }
             var result = await _userService.RegisterEmployee(request);
 
             return result;

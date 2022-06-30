@@ -74,16 +74,6 @@ namespace HR.LeaveManagement.Identity.Services
                 throw new Exception($"Username '{applicationUser.UserName}' already exists.");
             }
 
-
-            /*var user = new ApplicationUser
-            {
-                Email = request.Email,
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-                UserName = request.UserName,
-                EmailConfirmed = true
-            };*/
-
             var existingEmail = await _userManager.FindByEmailAsync(applicationUser.Email);
 
             if (existingEmail == null)

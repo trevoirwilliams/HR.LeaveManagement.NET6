@@ -2,7 +2,9 @@
 using HR.LeaveManagement.Application.Contracts.Identity;
 using HR.LeaveManagement.Application.DTOs.Employee;
 using HR.LeaveManagement.Application.DTOs.Identity;
+using HR.LeaveManagement.Application.DTOs.Identity.Validators;
 using HR.LeaveManagement.Application.Models.Identity;
+using HR.LeaveManagement.Application.Responses;
 using HR.LeaveManagement.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -63,12 +65,38 @@ namespace HR.LeaveManagement.Identity.Services
             }).ToList();
         }
 
-        public async Task<RegistrationResponse> RegisterEmployee(RegisterEmployeeDto registerEmployeeDto)
+        public async Task<BaseCommandResponse> RegisterEmployee(RegisterEmployeeDto registerEmployeeDto)
         {
-            //add validation
+            var response = new BaseCommandResponse();
+            var validator = new RegisterEmployeeDtoValidator();
+            var validationResult = validator.ValidateAsync(registerEmployeeDto).Result;
+            response.Errors = new List<string>();
 
-            var result = await _authService.Register(registerEmployeeDto);
-            return result;
+
+            if (validationResult.IsValid == false)
+            {
+                response.Errors = validationResult.Errors.Select(q => q.ErrorMessage).ToList();
+                response.Message = "Creation unsuccessful";
+                response.Success = false;
+            }
+
+            var result = new RegistrationResponse();
+            try
+            {
+                result = await _authService.Register(registerEmployeeDto);
+
+            }
+            catch (Exception ex)
+            {
+                response.Errors.Add(ex.Message.ToString());
+                response.Success = false;
+                response.Message = "Creation unsuccessful";
+                return response;
+            }
+
+            response.Success = true;
+            response.Message = $"UserId = {result.UserId}";
+            return response;
         }
 
        
