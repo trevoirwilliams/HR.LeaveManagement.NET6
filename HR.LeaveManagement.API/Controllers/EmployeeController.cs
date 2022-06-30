@@ -20,9 +20,9 @@ namespace HR.LeaveManagement.API.Controllers
 
         // GET: api/<EmployeeController>//
         [HttpGet]
-        public Task<List<AllEmployeesDto>> Get()
+        public async Task<List<AllEmployeesDto>> Get()
         {
-            var allEmployees = userService.GetAllEmployees();
+            var allEmployees = await userService.GetAllEmployees();
             return allEmployees;
         }
 

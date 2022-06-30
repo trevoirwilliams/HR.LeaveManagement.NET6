@@ -40,16 +40,24 @@ namespace HR.LeaveManagement.Application.UnitTests.Controllers
             Assert.Equal(_birthPlace, result.BirthPlace);
 
         }
-[Fact]
-        public void GetAllEmployees()
+        [Fact]
+        public async Task GetAllEmployees()
         {
-            
+            var employees = new List<AllEmployeesDto>();
+            employees.Add(new AllEmployeesDto { FirstName = "Ivan" });
+            employees.Add(new AllEmployeesDto { FirstName = "Valio" });
+            employees.Add(new AllEmployeesDto { FirstName = "Teodor" });
+
+
+            _userServiceMock.Setup(x => x.GetAllEmployees()).ReturnsAsync(employees);
             //arrange
-            var employeeController = new EmployeeController(Mock.Of<IUserService>());
+            var controller = new EmployeeController(_userServiceMock.Object);
+
             //act
-            var result = employeeController.Get();
+            var result = await controller.Get();
+            _userServiceMock.Verify(x => x.GetAllEmployees(), Times.Once);
             //assert
-            Assert.NotNull(result);
+            Assert.Equal(3, result.Count);
         }
     }
 }
