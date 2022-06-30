@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using FluentValidation.Results;
 using HR.LeaveManagement.Application.Constants;
 using HR.LeaveManagement.Application.Contracts.Identity;
 using HR.LeaveManagement.Application.DTOs.Identity;
+using HR.LeaveManagement.Application.Exceptions;
 using HR.LeaveManagement.Application.Models.Identity;
 using HR.LeaveManagement.Identity.Models;
 using Microsoft.AspNetCore.Identity;
@@ -71,6 +73,7 @@ namespace HR.LeaveManagement.Identity.Services
 
             if (existingUser != null)
             {
+                var error = $"Username '{applicationUser.UserName}' already exists.";
                 throw new Exception($"Username '{applicationUser.UserName}' already exists.");
             }
 
@@ -87,7 +90,10 @@ namespace HR.LeaveManagement.Identity.Services
                 }
                 else
                 {
-                    throw new Exception($"{result.Errors}");
+                    IList<string> errors = new List<string>();
+                    errors = result.Errors.Select(x => x.Description).ToList();
+                    throw new ValidationException(errors);
+                    //throw new Exception($"{result.Errors}");
                 }
             }
             else

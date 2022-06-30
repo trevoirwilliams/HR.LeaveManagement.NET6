@@ -40,5 +40,17 @@ namespace HR.LeaveManagement.Application.UnitTests.Controllers
             Assert.Equal(_birthPlace, result.BirthPlace);
 
         }
+[Fact]
+        public void GetAllEmployees()
+        {
+            
+            //arrange
+            var employeeController = new EmployeeController(Mock.Of<IUserService>());
+            //act
+            var result = employeeController.Get();
+            //assert
+            Assert.NotNull(result);
+        }
     }
 }
+
