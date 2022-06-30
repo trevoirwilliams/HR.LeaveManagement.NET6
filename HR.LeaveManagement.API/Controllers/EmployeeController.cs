@@ -28,9 +28,9 @@ namespace HR.LeaveManagement.API.Controllers
 
         // GET api/<EmployeeController>/5
       [HttpGet("{id}")]
-      public Task<EmployeeDetailsDto> Get(string id) 
+      public async Task<EmployeeDetailsDto> Get(string id) 
       {
-            return userService.GetEmployeeById(id);
+            return await userService.GetEmployeeById(id);
       }
       
       // POST api/<EmployeeController>
