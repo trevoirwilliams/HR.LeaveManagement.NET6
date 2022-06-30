@@ -23,6 +23,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\HR.LeaveManagement.API\HR.LeaveManagement.API.csproj" />
 		<ProjectReference Include="..\HR.LeaveManagement.Application\HR.LeaveManagement.Application.csproj" />
 	</ItemGroup>
 </Project>
