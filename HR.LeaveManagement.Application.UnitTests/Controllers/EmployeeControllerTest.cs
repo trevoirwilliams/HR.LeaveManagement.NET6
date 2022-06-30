@@ -40,7 +40,7 @@ namespace HR.LeaveManagement.Application.UnitTests.Controllers
             Assert.Equal(_birthPlace, result.BirthPlace);
 
         }
-[Fact]
+            [Fact]
         public void GetAllEmployees()
         {
             
