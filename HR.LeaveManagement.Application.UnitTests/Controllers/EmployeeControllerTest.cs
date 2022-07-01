@@ -15,6 +15,8 @@ namespace HR.LeaveManagement.Application.UnitTests.Controllers
 {
     public class EmployeeControllerTest
     {
+        const string _birthPlace = "Chiprovci";
+
         private Mock<IUserService> _userServiceMock;
 
         public EmployeeControllerTest()
@@ -22,25 +24,24 @@ namespace HR.LeaveManagement.Application.UnitTests.Controllers
             _userServiceMock = new Mock<IUserService>();
         }
 
-        const string _birthPlace = "Chiprovci";
-
         [Fact]
         public async Task GetEmployeeByIdShouldReturnCorrectEmployee()
         {
-
+            //Arange
             _userServiceMock.Setup(x => x.GetEmployeeById(It.IsAny<string>())).ReturnsAsync(new EmployeeDetailsDto { BirthPlace = _birthPlace });
-
             var controller = new EmployeeController(_userServiceMock.Object);
 
-            var result = await controller.Get("asdasd");
+            //Act
+            var result = await controller.Get("someRandomStringId");
 
-
+            //Assert
             _userServiceMock.Verify(x => x.GetEmployeeById(It.IsAny<string>()), Times.Once);
-
             Assert.Equal(_birthPlace, result.BirthPlace);
 
         }
-        public void GetAllEmployees()
+
+        [Fact]
+        public async Task GetAllEmployees()
         {
             var employees = new List<AllEmployeesDto>();
             employees.Add(new AllEmployeesDto { FirstName = "Ivan" });
