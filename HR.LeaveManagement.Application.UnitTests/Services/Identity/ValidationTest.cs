@@ -1,21 +1,14 @@
 ﻿using HR.LeaveManagement.Application.DTOs.Identity;
 using HR.LeaveManagement.Application.DTOs.Identity.Validators;
-<<<<<<< HEAD
 using HR.LeaveManagement.Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
-=======
->>>>>>> f293e4e0fb550c50b8c3e0be88e27265103de9d8
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-<<<<<<< HEAD
-using System.Threading;
-=======
->>>>>>> f293e4e0fb550c50b8c3e0be88e27265103de9d8
 using System.Threading.Tasks;
 using Xunit;
 
@@ -58,10 +51,7 @@ namespace HR.LeaveManagement.Application.UnitTests.Services.Identity
             var validator = new RegisterEmployeeDtoValidator();
             var result = await validator.ValidateAsync(employee);
 
-<<<<<<< HEAD
             Assert.NotNull(result);
-=======
->>>>>>> f293e4e0fb550c50b8c3e0be88e27265103de9d8
             Assert.False(result.IsValid);
             Assert.True(result.Errors.Count == 1);
         }
