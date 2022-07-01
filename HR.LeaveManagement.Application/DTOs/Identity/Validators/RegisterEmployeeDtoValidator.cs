@@ -62,10 +62,6 @@ namespace HR.LeaveManagement.Application.DTOs.Identity.Validators
                 .NotEmpty().WithMessage("Please enter {PropertyName}")
                 .MaximumLength(34).WithMessage("Invalid {PropertyName}");
 
-            RuleFor(a => a.CardAuthority)
-                .NotNull().WithMessage("Please enter {PropertyName}")
-                .NotEmpty().WithMessage("Please enter {PropertyName}");
-
             RuleFor(a => a.StartDate)
                 .NotNull().WithMessage("Please enter {PropertyName}")
                 .NotEmpty().WithMessage("Please enter {PropertyName}");

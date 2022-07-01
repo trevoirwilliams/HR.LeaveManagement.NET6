@@ -23,7 +23,7 @@ namespace HR.LeaveManagement.Application.DTOs.Identity
         public string BankDetails { get; set; }
         public int WorkExperienceInDays { get; set; }
         public DateTime StartDate { get; set; }
-        public int? WorkExperienceInCompanyInDays { get; private set; }
+        public int? WorkExperienceInCompanyInDays { get; set; }
         public int VacationHours { get; set; }
         public string Office { get; set; }
         public string Discipline { get; set; }
