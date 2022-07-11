@@ -1,9 +1,11 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace HR.LeaveManagement.Identity.Migrations
+#nullable disable
+
+namespace HR.LeaveManagement.API.Migrations
 {
-    public partial class AddUserTables : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -27,7 +29,21 @@ namespace HR.LeaveManagement.Identity.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MiddleName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BirthPlace = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdCard = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CardAuthority = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IBAN = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BankDetails = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    WorkExperienceInDays = table.Column<int>(type: "int", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    WorkExperienceInCompanyInDays = table.Column<int>(type: "int", nullable: true),
+                    VacationHours = table.Column<int>(type: "int", nullable: false),
+                    Office = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Discipline = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -159,28 +175,28 @@ namespace HR.LeaveManagement.Identity.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "cac43a6e-f7bb-4448-baaf-1add431ccbbf", "68bb5593-dfd4-4951-a3b0-5fe5788ebde4", "Employee", "EMPLOYEE" },
-                    { "cbc43a8e-f7bb-4445-baaf-1add431ffbbf", "d11f9641-113b-4d94-9505-35d91cc7f298", "Administrator", "ADMINISTRATOR" }
+                    { "cac43a6e-f7bb-4448-baaf-1add431ccbbf", "8a335313-2f71-4780-9573-5df85d8b9f47", "Employee", "EMPLOYEE" },
+                    { "cbc43a8e-f7bb-4445-baaf-1add431ffbbf", "5a9bf905-b743-4511-a423-ea9f9af6339f", "Administrator", "ADMINISTRATOR" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                columns: new[] { "Id", "AccessFailedCount", "Address", "BankDetails", "BirthPlace", "CardAuthority", "ConcurrencyStamp", "Country", "Discipline", "Email", "EmailConfirmed", "FirstName", "IBAN", "IdCard", "LastName", "LockoutEnabled", "LockoutEnd", "MiddleName", "NormalizedEmail", "NormalizedUserName", "Office", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "StartDate", "TwoFactorEnabled", "UserName", "VacationHours", "WorkExperienceInCompanyInDays", "WorkExperienceInDays" },
                 values: new object[,]
                 {
-                    { "8e445865-a24d-4543-a6c6-9443d048cdb9", 0, "d2cedf01-cee0-430a-b820-0c377b586c0a", "admin@localhost.com", true, "System", "Admin", false, null, "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "AQAAAAEAACcQAAAAEN/+QPuA+uuzTXrdYR7YF0/+JPxiPmjUY/ukh+lBiXnLyMcVGwVaQDSrcginM2gbtA==", null, false, "b0bc8cba-dbe5-49c1-b77c-108c1dcccacc", false, "admin@localhost.com" },
-                    { "9e224968-33e4-4652-b7b7-8574d048cdb9", 0, "49ff2dd4-d01a-42bb-afb8-83202db83269", "user@localhost.com", true, "System", "User", false, null, "USER@LOCALHOST.COM", "USER@LOCALHOST.COM", "AQAAAAEAACcQAAAAEEnH3am4iXtp/eOTCv2+/TfcX6lIU9iYzudCAZkuGPuPyHjO8/6+fUwUX0kZfjZj3A==", null, false, "a039aaef-c811-4cc7-a4e3-42092c879d08", false, "user@localhost.com" }
+                    { "8e445865-a24d-4543-a6c6-9443d048cdb9", 0, "123 street", "bank", "Sofia", "Sofia", "3ea3fab3-f76f-4ea2-9ae4-b9ca67955135", "Bulgaria", "test", "admin@localhost.com", true, "System", "123", "3333333333", "Admin", false, null, "admin", "ADMIN@LOCALHOST.COM", "ADMIN@LOCALHOST.COM", "sofia", "AQAAAAEAACcQAAAAEC06D8IhcHJQa3OPpUkpwTd2Xv4EQOC6Sw+JxKrRTW8unYMhKvLTPDL0Zx6o5oMzEw==", null, false, "fae031d7-c834-45d8-9e77-108c6c2497a1", new DateTime(2022, 6, 29, 12, 6, 53, 222, DateTimeKind.Local).AddTicks(4844), false, "admin@localhost.com", 52, null, 60 },
+                    { "9e224968-33e4-4652-b7b7-8574d048cdb9", 0, "123 street", "bank", "Sofia", "Sofia", "dd9f3a83-7739-49fd-9ff1-aa1a1d751704", "Bulgaria", "test", "user@localhost.com", true, "System", "123", "3333333333", "User", false, null, "admin", "USER@LOCALHOST.COM", "USER@LOCALHOST.COM", "sofia", "AQAAAAEAACcQAAAAEM9O3tZDVw5w0f9TugPZs6I0j0EahRzqoBBretQcM9LOwsSPli+5+DXd/v04ygY6vw==", null, false, "388cfe94-a35f-460d-aba5-e146d4d76956", new DateTime(2022, 6, 29, 12, 6, 53, 248, DateTimeKind.Local).AddTicks(6464), false, "user@localhost.com", 52, null, 60 }
                 });
-
-            migrationBuilder.InsertData(
-                table: "AspNetUserRoles",
-                columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "cac43a6e-f7bb-4448-baaf-1add431ccbbf", "9e224968-33e4-4652-b7b7-8574d048cdb9" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
                 values: new object[] { "cbc43a8e-f7bb-4445-baaf-1add431ffbbf", "8e445865-a24d-4543-a6c6-9443d048cdb9" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "cac43a6e-f7bb-4448-baaf-1add431ccbbf", "9e224968-33e4-4652-b7b7-8574d048cdb9" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

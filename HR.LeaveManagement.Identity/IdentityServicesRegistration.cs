@@ -52,6 +52,7 @@ namespace HR.LeaveManagement.Identity
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:Key"]))
                     };
                 });
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             return services;
         }
