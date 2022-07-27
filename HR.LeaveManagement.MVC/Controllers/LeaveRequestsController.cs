@@ -49,7 +49,7 @@ namespace leave_management.Controllers
                 var response = await _leaveRequestService.CreateLeaveRequest(leaveRequest);
                 if (response.Success)
                 {
-                    return RedirectToAction(nameof(Create));
+                    return RedirectToAction(nameof(MyLeave));
                 }
                 ModelState.AddModelError("", response.ValidationErrors);
             }
