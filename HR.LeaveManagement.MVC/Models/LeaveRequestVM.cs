@@ -45,6 +45,7 @@ namespace HR.LeaveManagement.MVC.Models
 
         [Display(Name = "Comments")]
         [MaxLength(300)]
+        [Required]
         public string RequestComments { get; set; }
     }
 
