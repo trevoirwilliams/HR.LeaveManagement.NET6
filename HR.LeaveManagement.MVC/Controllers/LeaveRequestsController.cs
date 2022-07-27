@@ -49,7 +49,7 @@ namespace leave_management.Controllers
                 var response = await _leaveRequestService.CreateLeaveRequest(leaveRequest);
                 if (response.Success)
                 {
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Create));
                 }
                 ModelState.AddModelError("", response.ValidationErrors);
             }
@@ -87,6 +87,22 @@ namespace leave_management.Controllers
             }
             catch (Exception ex)
             {
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult> MyLeave()
+        {
+            try
+            {
+                var model = await _leaveRequestService.GetUserLeaveRequests();
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+
                 return RedirectToAction(nameof(Index));
             }
         }
