@@ -109,19 +109,19 @@
             <td>
                 @if (item.Cancelled)
                 {
-                    <span class="badge badge-secondary">Cancelled</span>
+                    <span class="text-secondary">Cancelled</span>
                 }
                 else if (item.Approved == true)
                 {
-                    <span class="badge badge-success">Approved</span>
+                    <span class="text-success">Approved</span>
                 }
                 else if (item.Approved == false)
                 {
-                    <span class="badge badge-danger">Rejected</span>
+                    <span class="text-danger">Rejected</span>
                 }
                 else
                 {
-                    <span class="badge badge-warning">Pending Approval</span>
+                    <span class="text-warning">Pending Approval</span>
                 }
             </td>
             <td>

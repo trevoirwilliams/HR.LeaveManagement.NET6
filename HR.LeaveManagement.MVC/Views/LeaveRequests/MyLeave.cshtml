@@ -1,0 +1,69 @@
+﻿@model HR.LeaveManagement.MVC.Models.EmployeeLeaveRequestViewVM
+
+@{
+    ViewData["Title"] = "MyLeave";
+}
+
+<h1>My Leave</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("Leave Type")
+            </th>
+            <th>
+                @Html.DisplayName("Start Date")
+            </th>
+            <th>
+                @Html.DisplayName("End Date")
+            </th>
+            <th>
+                @Html.DisplayName("Date Requested")
+            </th>
+            <th>
+                @Html.DisplayName("Approval State")
+            </th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.LeaveRequests)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LeaveType.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateRequested)
+                </td>
+                <td>
+                    @if (item.Cancelled)
+                    {
+                        <span class="text-secondary">Cancelled</span>
+                    }
+                    else if (item.Approved.HasValue && item.Approved.Value)
+                    {
+                        <span class="text-success">Approved</span>
+                    }
+                    else if (item.Approved.HasValue && !item.Approved.Value)
+                    {
+                        <span class="text-danger">Rejected</span>
+                    }
+                    else
+                    {
+                        <span class="text-warning">Pending Approval</span>
+                    }
+                </td>
+               
+            </tr>
+        }
+    </tbody>
+</table>
+
