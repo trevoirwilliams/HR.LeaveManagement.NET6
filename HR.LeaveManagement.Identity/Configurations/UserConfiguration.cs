@@ -25,7 +25,20 @@ namespace HR.LeaveManagement.Identity.Configurations
                      UserName = "admin@localhost.com",
                      NormalizedUserName = "ADMIN@LOCALHOST.COM",
                      PasswordHash = hasher.HashPassword(null, "P@ssword1"),
-                     EmailConfirmed = true
+                     EmailConfirmed = true,
+                     MiddleName = "admin",
+                     BirthPlace = "Sofia",
+                     Country = "Bulgaria",
+                     Address = "123 street",
+                     IdCard = "3333333333",
+                     CardAuthority = "Sofia",
+                     IBAN = "123",
+                     BankDetails = "bank",
+                     WorkExperienceInDays = 60,
+                     StartDate = DateTime.Now,
+                     VacationHours = 52,
+                     Office = "sofia",
+                     Discipline = "test",
                  },
                  new ApplicationUser
                  {
@@ -37,7 +50,20 @@ namespace HR.LeaveManagement.Identity.Configurations
                      UserName = "user@localhost.com",
                      NormalizedUserName = "USER@LOCALHOST.COM",
                      PasswordHash = hasher.HashPassword(null, "P@ssword1"),
-                     EmailConfirmed = true
+                     EmailConfirmed = true,
+                     MiddleName = "admin",
+                     BirthPlace = "Sofia",
+                     Country = "Bulgaria",
+                     Address = "123 street",
+                     IdCard = "3333333333",
+                     CardAuthority = "Sofia",
+                     IBAN = "123",
+                     BankDetails = "bank",
+                     WorkExperienceInDays = 60,
+                     StartDate = DateTime.Now,
+                     VacationHours = 52,
+                     Office = "sofia",
+                     Discipline = "test",
                  }
             );
         }

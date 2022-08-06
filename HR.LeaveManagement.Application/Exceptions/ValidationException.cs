@@ -16,5 +16,12 @@ namespace HR.LeaveManagement.Application.Exceptions
                 Errors.Add(error.ErrorMessage);
             }
         }
+        public ValidationException(IList<string> errors)
+        {
+            foreach (var item in errors)
+            {
+                Errors.Add(item);
+            }
+        }
     }
 }

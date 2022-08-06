@@ -1,5 +1,9 @@
-﻿using HR.LeaveManagement.Application.Constants;
+﻿using AutoMapper;
+using FluentValidation.Results;
+using HR.LeaveManagement.Application.Constants;
 using HR.LeaveManagement.Application.Contracts.Identity;
+using HR.LeaveManagement.Application.DTOs.Identity;
+using HR.LeaveManagement.Application.Exceptions;
 using HR.LeaveManagement.Application.Models.Identity;
 using HR.LeaveManagement.Identity.Models;
 using Microsoft.AspNetCore.Identity;
@@ -19,15 +23,17 @@ namespace HR.LeaveManagement.Identity.Services
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IMapper _mapper;
         private readonly JwtSettings _jwtSettings;
 
         public AuthService(UserManager<ApplicationUser> userManager,
             IOptions<JwtSettings> jwtSettings,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager, IMapper mapper)
         {
             _userManager = userManager;
             _jwtSettings = jwtSettings.Value;
             _signInManager = signInManager;
+            _mapper = mapper;
         }
 
         public async Task<AuthResponse> Login(AuthRequest request)
@@ -59,43 +65,40 @@ namespace HR.LeaveManagement.Identity.Services
             return response;
         }
 
-        public async Task<RegistrationResponse> Register(RegistrationRequest request)
+        public async Task<RegistrationResponse> Register(RegisterEmployeeDto employeeDto)
         {
-            var existingUser = await _userManager.FindByNameAsync(request.UserName);
+            var applicationUser = new ApplicationUser();
+            _mapper.Map(employeeDto, applicationUser);
+            var existingUser = await _userManager.FindByNameAsync(applicationUser.UserName);
 
             if (existingUser != null)
             {
-                throw new Exception($"Username '{request.UserName}' already exists.");
+                var error = $"Username '{applicationUser.UserName}' already exists.";
+                throw new Exception($"Username '{applicationUser.UserName}' already exists.");
             }
 
-            var user = new ApplicationUser
-            {
-                Email = request.Email,
-                FirstName = request.FirstName,
-                LastName = request.LastName,
-                UserName = request.UserName,
-                EmailConfirmed = true
-            };
-
-            var existingEmail = await _userManager.FindByEmailAsync(request.Email);
+            var existingEmail = await _userManager.FindByEmailAsync(applicationUser.Email);
 
             if (existingEmail == null)
             {
-                var result = await _userManager.CreateAsync(user, request.Password);
+                var result = await _userManager.CreateAsync(applicationUser, employeeDto.Password);
 
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, "Employee");
-                    return new RegistrationResponse() { UserId = user.Id };
+                    await _userManager.AddToRoleAsync(applicationUser, "Employee");
+                    return new RegistrationResponse() { UserId = applicationUser.Id };
                 }
                 else
                 {
-                    throw new Exception($"{result.Errors}");
+                    IList<string> errors = new List<string>();
+                    errors = result.Errors.Select(x => x.Description).ToList();
+                    throw new ValidationException(errors);
+                    //throw new Exception($"{result.Errors}");
                 }
             }
             else
             {
-                throw new Exception($"Email {request.Email } already exists.");
+                throw new Exception($"Email {applicationUser.Email} already exists.");
             }
         }
 

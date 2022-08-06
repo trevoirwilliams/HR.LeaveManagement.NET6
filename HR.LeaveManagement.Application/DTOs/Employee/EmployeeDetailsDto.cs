@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace HR.LeaveManagement.Identity.Models
+namespace HR.LeaveManagement.Application.DTOs.Employee
 {
-    public class ApplicationUser : IdentityUser
+    public class EmployeeDetailsDto
     {
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
